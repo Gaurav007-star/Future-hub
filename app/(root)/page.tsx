@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <>
       <div className="root-page w-full h-[80vh] flex flex-col items-center justify-center">
-        <div className="circle-one absolute w-[200px] h-[200px] bg-[#86EE02] rounded-[50%] blur-[10vh] top-[10%] left-[100px]"></div>
+        <div className="circle-one absolute w-[200px] h-[200px] bg-[#86EE02] rounded-[50%] blur-[10vh] top-[20%] left-[200px]"></div>
 
         <div className="circle-one absolute w-[300px] h-[300px] bg-[#ffcc35] rounded-[50%] blur-[15vh] top-[60%] right-[100px]"></div>
 
@@ -30,8 +30,7 @@ export default function Home() {
 
         {/* form section */}
         <Form
-          action="/"
-          scroll={false}
+          action={"/"}
           className="seach-form relative w-[50%] h-[12%] bg-red-400 mt-5 rounded-xl"
         >
           <input
@@ -71,7 +70,6 @@ export default function Home() {
 
       {/* project section */}
       <Projects />
-
     </>
   );
 }
