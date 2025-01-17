@@ -1,9 +1,13 @@
 import Projects from "@/components/Projects";
+import Database from "@/lib/db";
 import Form from "next/form";
 import { RiSearchLine } from "react-icons/ri";
 import { RxCross2 } from "react-icons/rx";
 
 export default function Home() {
+  // Database conection
+  Database()
+  
   return (
     <>
       <div className="root-page w-full h-[80vh] flex flex-col items-center justify-center">

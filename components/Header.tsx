@@ -5,11 +5,24 @@ import { auth, signIn, signOut } from "@/auth";
 
 const Header = async () => {
   const session = await auth();
-
   const logoutHandler = async () => {
     "use server";
     await signOut();
   };
+
+  if (session?.user) {
+    await fetch("http://127.0.0.1:3000/api/user", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        name: session.user.name,
+        email: session.user.email,
+        image: session.user.image
+      })
+    });
+  }
 
   return (
     <div className="w-full h-[10vh] flex items-center justify-between">
