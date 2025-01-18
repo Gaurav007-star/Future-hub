@@ -3,16 +3,16 @@ import ProjectModel from "@/lib/modals/project.model";
 
 export const GET = async (
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: { pid: string } }
 ) => {
   try {
     // Initialize database connection
     await Database();
     const param = await params;
-    const { id } = param;
+    const { pid } = param;
 
     // Validate the presence of the ID
-    if (!id) {
+    if (!pid) {
       return new Response(
         JSON.stringify({
           success: false,
@@ -23,16 +23,16 @@ export const GET = async (
     }
 
     // Fetch projects for the user
-    const projects = await ProjectModel.find({
-      'author.id':id,
+    const projects = await ProjectModel.findOne({
+      _id:pid,
     });
 
   
     // Handle case where no projects are found
-    if (projects.length < 1) {
+    if (!projects) {
       return new Response(
         JSON.stringify({
-          message: "Hurry up, create a project first. 😒",
+          message: "Project not found 😒",
         }),
         { status: 400 }
       );

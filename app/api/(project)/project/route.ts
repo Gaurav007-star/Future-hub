@@ -39,9 +39,9 @@ export const GET = async () => {
 // create project
 export const POST = async (request: Request) => {
   try {
-    const { title, author, category, image, details } = await request.json();
+    const { title, author, category, image, details,description } = await request.json();
 
-    if (!title || !author || !category || !image || !details) {
+    if (!title || !author || !category || !image || !details || !description) {
       return new Response(
         JSON.stringify({
           message: "Empty Field found",
@@ -50,7 +50,7 @@ export const POST = async (request: Request) => {
           status: 400,
         }
       );
-    }
+    }    
 
     const findTitle = await ProjectModel.findOne({ title });
     if (findTitle) {
@@ -70,6 +70,7 @@ export const POST = async (request: Request) => {
       category,
       image,
       details,
+      description
     });
 
     return new Response(

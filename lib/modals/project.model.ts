@@ -6,11 +6,17 @@ const ProjectSchema = new mongoose.Schema({
     required: true,
   },
   author: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
-    required: true,
+    id: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
+    name: {
+      type: String,
+      required: true,
+    },
   },
-  viwes: {
+  views: {
     type: Number,
     default: 0,
   },
@@ -22,10 +28,17 @@ const ProjectSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  description: {
+    type: String,
+    maxlength: [20, "Use only 20 characters to write description"],
+    required: true,
+  },
   details: {
     type: String,
+    default: "",
   },
 });
 
-const ProjectModel = mongoose.models.Project || mongoose.model('Project',ProjectSchema);
+const ProjectModel =
+  mongoose.models.Project || mongoose.model("Project", ProjectSchema);
 export default ProjectModel;

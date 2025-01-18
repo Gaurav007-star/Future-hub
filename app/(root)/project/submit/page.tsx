@@ -1,9 +1,64 @@
-"use client";
-
+import { auth } from "@/auth";
 import { Button } from "@/components/ui/button";
-import MDEditor from "@uiw/react-md-editor";
 
-const page = () => {
+const page = async() => {
+
+
+  const session = await auth()
+
+  let user = {};
+
+  if (session?.user) {
+    let data = await fetch(
+      `http://127.0.0.1:3000/api/user/${session.user.email}`,
+      {
+        method: "GET",
+        headers: {
+          "content-type": "application/json"
+        }
+      }
+    );
+    data = await data.json();
+    user = data?.user;
+  }
+
+
+  async function FormHandler(formData: FormData) {
+    "use server";
+    const title = formData.get("title");
+    const description = formData.get("description");
+    const category = formData.get("category");
+    const image = formData.get("image");
+    const details = formData.get("details");
+
+    const data = await fetch(`http://127.0.0.1:3000/api/project`,{
+      method:"POST",
+      headers:{
+        'content-type':'application/json'
+      },
+      body:JSON.stringify({
+        title,
+        description,
+        category,
+        image,
+        details,
+        author:{
+          id:user?._id,
+          name:user?.name
+        }
+      })
+    })
+    
+
+    const response = await data.json());
+    
+    if(response.success){
+      console.log(response.message)
+    }
+
+
+  }
+
   return (
     <div className="w-full h-screen">
       {/* custom circles */}
@@ -14,7 +69,7 @@ const page = () => {
 
       <h1 className="text-[10vh] w-full text-center">Submit your peoject 🤖</h1>
       <form
-        action="/"
+        action={user && FormHandler}
         className="submit-form w-full h-full  flex flex-col items-center gap-5 pt-5"
       >
         <input
@@ -26,10 +81,10 @@ const page = () => {
         />
 
         <textarea
-          name="details"
-          id="details"
-          placeholder="Type the details of the project"
-          className="outline-none font-bold  h-[20vh] w-[40%] border-2 border-black rounded-lg pl-2"
+          name="description"
+          id="description"
+          placeholder="Type the description of the project"
+          className="outline-none font-bold  h-[10vh] w-[40%] border-2 border-black rounded-lg pl-2"
         />
 
         <input
@@ -48,21 +103,11 @@ const page = () => {
           className="w-[40%] font-bold outline-none border-2 border-black h-[7vh] rounded-lg pl-2"
         />
 
-        <MDEditor
+        <textarea
+          name="details"
           id="details"
-          preview="edit"
-          textareaProps={{
-            placeholder: "DEscribe your project in details..."
-          }}
-          previewOptions={{
-            disallowedElements: ["style"]
-          }}
-          style={{
-            borderRadius: "20px",
-            overflow: "hidden",
-            backgroundColor: "white",
-            width: "40%"
-          }}
+          placeholder="Write the details of the project"
+          className="outline-none font-bold  h-[20vh] w-[40%] border-2 border-black rounded-lg pl-2"
         />
 
         <Button type="submit">Submit</Button>

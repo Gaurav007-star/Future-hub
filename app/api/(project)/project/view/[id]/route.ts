@@ -23,26 +23,19 @@ export const GET = async (
     }
 
     // Fetch projects for the user
-    const projects = await ProjectModel.find({
-      'author.id':id,
-    });
+    const projects = await ProjectModel.updateOne(
+      {
+        _id: id,
+      },
 
-  
-    // Handle case where no projects are found
-    if (projects.length < 1) {
-      return new Response(
-        JSON.stringify({
-          message: "Hurry up, create a project first. 😒",
-        }),
-        { status: 400 }
-      );
-    }
+      { $inc: { views: 1 } }
+    );
 
     // Respond with the found projects
     return new Response(
       JSON.stringify({
         success: true,
-        projects,
+        message:"update successfully"
       }),
       { status: 200 }
     );

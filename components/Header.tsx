@@ -2,6 +2,7 @@ import Image from "next/image";
 import React from "react";
 import { Button } from "./ui/button";
 import { auth, signIn, signOut } from "@/auth";
+import Link from "next/link";
 
 const Header = async () => {
   const session = await auth();
@@ -31,26 +32,28 @@ const Header = async () => {
       <div className="user-details py-5 h-full w-[70%] flex items-center justify-end gap-3 ">
         {session && session?.user ? (
           <>
-            <Button>create</Button>
+            <Link href={"/project/submit"}><Button>create</Button></Link>
 
             <form action={logoutHandler}>
               <Button>logout</Button>
             </form>
 
-            <Image
-              src={`${
-                session && session?.user ? session.user?.image : "/image.png"
-              }`}
-              alt="img"
-              width={55}
-              height={10}
-              style={{
-                borderRadius: "50%",
-                padding: "2px",
-                border: "2px solid #04311d",
-                cursor: "pointer"
-              }}
-            />
+            <Link href={"/user"}>
+              <Image
+                src={`${
+                  session && session?.user ? session.user?.image : "/image.png"
+                }`}
+                alt="img"
+                width={55}
+                height={10}
+                style={{
+                  borderRadius: "50%",
+                  padding: "2px",
+                  border: "2px solid #04311d",
+                  cursor: "pointer"
+                }}
+              />
+            </Link>
           </>
         ) : (
           <form

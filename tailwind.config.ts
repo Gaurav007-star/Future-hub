@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+const plugin = require('tailwindcss/plugin');
 
 export default {
     darkMode: ["class"],
@@ -64,8 +65,38 @@ export default {
   			lg: 'var(--radius)',
   			md: 'calc(var(--radius) - 2px)',
   			sm: 'calc(var(--radius) - 4px)'
-  		}
+  		},
+		animation: {
+			pulse1: 'pulse 1.5s infinite ease-in-out -0.3s',
+			pulse2: 'pulse 1.5s infinite ease-in-out -0.1s',
+			pulse3: 'pulse 1.5s infinite ease-in-out 0.1s',
+			pulse4: 'pulse 1.5s infinite ease-in-out 0.3s',
+			pulse5: 'pulse 1.5s infinite ease-in-out 0.5s',
+		  },
+		  keyframes: {
+			pulse: {
+			  '0%, 100%': {
+				transform: 'scale(0.8)',
+				backgroundColor: '#b3d4fc',
+				boxShadow: '0 0 0 0 rgba(178, 212, 252, 0.7)',
+			  },
+			  '50%': {
+				transform: 'scale(1.2)',
+				backgroundColor: '#6793fb',
+				boxShadow: '0 0 0 10px rgba(178, 212, 252, 0)',
+			  },
+			},
+		},
   	}
   },
-  plugins: [require("tailwindcss-animate")],
+  
+  plugins: [require("tailwindcss-animate"),plugin(function ({ addUtilities }) {
+	addUtilities({
+	  '.animation-delay--0.3s': { animationDelay: '-0.3s' },
+	  '.animation-delay--0.1s': { animationDelay: '-0.1s' },
+	  '.animation-delay-0.1s': { animationDelay: '0.1s' },
+	  '.animation-delay-0.3s': { animationDelay: '0.3s' },
+	  '.animation-delay-0.5s': { animationDelay: '0.5s' },
+	});
+  }),],
 } satisfies Config;
