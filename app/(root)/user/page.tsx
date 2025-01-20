@@ -1,9 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
 import React from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Button } from "@/components/ui/button";
 import { auth } from "@/auth";
 import Link from "next/link";
+import DeleteIcon from "@/components/DeleteIcon";
 
 const page = async () => {
   const session = await auth();
@@ -63,7 +63,7 @@ const page = async () => {
       {/* right side */}
       <div className="right-side p-5 w-[80%] h-max">
         <h1 className="text-[5vh] mb-4">All Projects 🤖</h1>
-        <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-2 lg:grid-cols-4 lg:gap-8">
+        <div className="grid sm:grid-cols-1 md:grid-cols-2 md:gap-5 gap-2 lg:grid-cols-4 lg:gap-8">
           {/* projects -- section */}
 
           {project && project.length > 0 ? (
@@ -74,7 +74,9 @@ const page = async () => {
                   style={{ border: "4px solid black" }}
                   key={project?._id}
                 >
-                  <h2 className="text-[20px]">{project?.title}</h2>
+                  <h2 className="text-[20px] w-full flex justify-between items-center">
+                    {project?.title} <DeleteIcon id={project._id} />
+                  </h2>
                   <p className="text-[12px]">{project?.description}</p>
                   <img
                     src={project?.image ? project?.image : "/image.png"}

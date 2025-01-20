@@ -57,7 +57,7 @@ const page = async ({ params }: { params: { id: string } }) => {
           "https://placehold.co/600x400"
         }
         alt="loading..."
-        className="w-[70vw] h-[85vh] rounded-[50px] border-4 border-black cursor-pointer mt-2"
+        className="w-[70vw] h-[85vh] rounded-[50px] border-4 border-black cursor-pointer mt-2 shadow-lg"
       />
 
       <div className="user-details w-[70vw] h-auto flex justify-between my-5 px-5">

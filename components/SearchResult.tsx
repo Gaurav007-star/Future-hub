@@ -1,31 +1,28 @@
 /* eslint-disable @next/next/no-img-element */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { auth } from "@/auth";
 import Link from "next/link";
 import React from "react";
 
-const Projects = async () => {
-  const session = await auth();
-
-  const fetchData = await fetch("http://127.0.0.1:3000/api/project", {
-    method: "GET",
-    headers: {
-      "conetent-type": "application/json"
-    }
-  });
-
-  const data = await fetchData.json();
+const SearchResult = ({
+  projects,
+  emptyString
+}: {
+  projects: any;
+  emptyString: string;
+}) => {
 
   return (
     <>
-      {session && session?.user ? (
-        <>
-          {/* Trendy projects */}
-          <div className="peoject-page w-full h-auto flex flex-col pt-[5vh] pb-[5vh]">
-            <h1 className="w-full text-[10vh]">Trendy Projects</h1>
+      <div className="project-page w-full h-auto flex flex-col pt-[5vh] pb-[5vh] mt-[10vh]">
+        {emptyString ? (
+          <>
+            <h1 className="w-full text-[10vh]">Search Results</h1>
+
             <div className="project-wrapper flex flex-wrap gap-7 w-full h-auto p-5">
-              {data && data.projects.length > 0 ? (
-                data.projects.map((project: any) => {
+              {projects &&
+              typeof projects !== "string" &&
+              projects.length > 0 ? (
+                projects.map((project: any) => {
                   return (
                     <>
                       <div
@@ -46,8 +43,10 @@ const Projects = async () => {
                           }}
                         />
 
-                        {/* user-details */}
-                        <div className="user-details flex mt-5 h-[5vh] justify-between">
+                        <div
+                          className="user-details flex mt-5 h-[5vh] justify-between"
+                          key={project?._id}
+                        >
                           <div className="left flex flex-col justify-center">
                             <h3 className="text-[12px]">
                               @{project?.author.name}
@@ -67,18 +66,18 @@ const Projects = async () => {
               ) : (
                 <>
                   <h1 className="w-full text-[7vh] bg-clip-text text-transparent bg-gradient-to-r from-teal-600 to-teal-400">
-                    We don't has any projects right now *-*
+                    Not Found *--*
                   </h1>
                 </>
               )}
             </div>
-          </div>{" "}
-        </>
-      ) : (
-        <></>
-      )}
+          </>
+        ) : (
+          <></>
+        )}
+      </div>
     </>
   );
 };
 
-export default Projects;
+export default SearchResult;
