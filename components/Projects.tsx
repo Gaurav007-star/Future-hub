@@ -72,7 +72,7 @@ const Projects = async () => {
               ) : (
                 <>
                   <h1 className="w-full text-[7vh] bg-clip-text text-transparent bg-gradient-to-r from-teal-600 to-teal-400">
-                    We don't has any projects right now *-*
+                    We don&apos;t has any projects right now *-*
                   </h1>
                 </>
               )}

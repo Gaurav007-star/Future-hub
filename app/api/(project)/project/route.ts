@@ -65,7 +65,7 @@ export const POST = async (request: Request) => {
       );
     }
 
-    const project = await ProjectModel.create({
+    await ProjectModel.create({
       title,
       author,
       category,
