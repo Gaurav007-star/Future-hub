@@ -6,8 +6,8 @@ import React from "react";
 
 
 const page = async ({ params }: { params: { id: string } }) => {
-  const param = await params
-  const { id } = param;
+
+  const { id } = params;
 
   let project = {};
   let user = {};
@@ -36,15 +36,6 @@ const page = async ({ params }: { params: { id: string } }) => {
         }
       }
     );
-
-    
-    // update view api
-    // await fetch(`http://localhost:3000/api/project/view/${project?.projects._id}`, {
-    //   method: "GET",
-    //   headers: {
-    //     "content-type": "application/json"
-    //   }
-    // });
 
     data = await data.json();
     user = data?.user;
