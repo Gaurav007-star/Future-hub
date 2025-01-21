@@ -20,7 +20,7 @@ const page = async () => {
     user = data?.user;
   }
 
-  return <SubmitProject user={user}/>;
+  return <SubmitProject user={user && user}/>;
 };
 
 export default page;

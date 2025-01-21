@@ -39,12 +39,12 @@ const page = async () => {
   }
 
   return (
-    <div className="user-wrapper w-full h-auto flex">
+    <div className="user-wrapper w-full h-auto lg:flex md:flex">
       {/* Left side */}
-      <div className="left-side w-[20%] h-[80vh] p-5">
-        <div className="user-card w-full h-auto bg-[#88ee02b1] flex flex-col items-center justify-center rounded-[20px] p-5 border-4 border-black hover:scale-105 hover:transition-transform cursor-pointer hover:shadow-3xl">
+      <div className="left-side lg:w-[20%] lg:h-[80vh] md:w-[20%] md:h-[80vh] p-5 sm:w-full sm:h-max ">
+        <div className="user-card lg:w-full lg:h-auto bg-[#88ee02b1] flex flex-col items-center justify-center rounded-[20px] p-5 border-4 border-black hover:scale-105 hover:transition-transform cursor-pointer hover:shadow-3xl">
           {/* user picture */}
-          <Avatar className="border-4 border-slate-900  w-[120px] h-[120px] hover:shadow-pic-shadow hover:transition-transform">
+          <Avatar className="border-4 border-slate-900  lg:w-[120px] lg:h-[120px] sm:w-[70px] sm:h-[70px] hover:shadow-pic-shadow hover:transition-transform">
             <AvatarImage
               src={`${session?.user ? user?.image : "https://github.com/shadcn.png"}`}
             />
@@ -63,7 +63,7 @@ const page = async () => {
       {/* right side */}
       <div className="right-side p-5 w-[80%] h-max">
         <h1 className="text-[5vh] mb-4">All Projects 🤖</h1>
-        <div className="grid sm:grid-cols-1 md:grid-cols-2 md:gap-5 gap-2 lg:grid-cols-4 lg:gap-8">
+        <div className="grid sm:grid-cols-1 md:grid-cols-2 md:gap-5 lg:grid-cols-4 lg:gap-8 gap-5">
           {/* projects -- section */}
 
           {project && project.length > 0 ? (

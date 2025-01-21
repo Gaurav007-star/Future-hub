@@ -7,7 +7,7 @@ import React from "react";
 const Projects = async () => {
   const session = await auth();
 
-  const fetchData = await fetch("http://127.0.0.1:3000/api/project", {
+  const fetchData = await fetch("http://127.0.0.1:3000/api/project/trends", {
     method: "GET",
     headers: {
       "conetent-type": "application/json"
@@ -21,15 +21,17 @@ const Projects = async () => {
       {session && session?.user ? (
         <>
           {/* Trendy projects */}
-          <div className="peoject-page w-full h-auto flex flex-col pt-[5vh] pb-[5vh]">
-            <h1 className="w-full text-[10vh]">Trendy Projects</h1>
-            <div className="project-wrapper flex flex-wrap gap-7 w-full h-auto p-5">
+          <div className="peoject-page w-full h-auto flex flex-col pt-[5vh] pb-[5vh] ">
+            <h1 className="w-full lg:text-[10vh] sm:text-[10vh] mb-4">
+              Trendy Projects
+            </h1>
+            <div className="project-wrapper grid sm:grid-cols-1 gap-5 md:grid-cols-2 md:gap-5 lg:grid-cols-4 lg:gap-8">
               {data && data.projects.length > 0 ? (
                 data.projects.map((project: any) => {
                   return (
                     <>
                       <div
-                        className="project-box w-[20vw] h-auto rounded-lg p-4 cursor-pointer hover:transition-transform hover:scale-105 hover:shadow-3xl"
+                        className="project-box w-auto h-auto rounded-lg p-4 cursor-pointer hover:transition-transform hover:scale-105 hover:shadow-3xl"
                         style={{ border: "4px solid black" }}
                         key={project?._id}
                       >
@@ -48,10 +50,13 @@ const Projects = async () => {
 
                         {/* user-details */}
                         <div className="user-details flex mt-5 h-[5vh] justify-between">
-                          <div className="left flex flex-col justify-center">
+                          <div className="left flex flex-col justify-center items-center">
                             <h3 className="text-[12px]">
                               @{project?.author.name}
                             </h3>
+                            <span className="text-[12px] text-slate-400">
+                              Views :{project?.views}{" "}
+                            </span>
                           </div>
                           <Link href={`/project/${project._id}`}>
                             {" "}

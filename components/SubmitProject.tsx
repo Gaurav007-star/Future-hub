@@ -2,13 +2,16 @@
 import { Button } from "@/components/ui/button";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { toast } from "react-toastify";
 
 const SubmitProject = ({ user }: { user: any }) => {
+  const router = useRouter();
 
-  const router = useRouter()
+  const [loading, setLoading] = useState<boolean>(false);
 
   async function FormHandler(formData: FormData) {
+    setLoading(true);
     const title = formData.get("title");
     const description = formData.get("description");
     const category = formData.get("category");
@@ -27,10 +30,15 @@ const SubmitProject = ({ user }: { user: any }) => {
           name: user?.name
         }
       });
+
+      setLoading(false);
       toast.success(response.data.message);
-      router.refresh()
+
+      router.refresh();
     } catch (error: any) {
+      setLoading(false);
       toast.error(error.response.data.message);
+      router.refresh();
     }
   }
 
@@ -44,7 +52,7 @@ const SubmitProject = ({ user }: { user: any }) => {
 
       <h1 className="text-[10vh] w-full text-center">Submit your peoject 🤖</h1>
       <form
-        action={user && FormHandler}
+        action={FormHandler}
         className="submit-form w-full h-full  flex flex-col items-center gap-5 pt-5"
       >
         <input
@@ -85,7 +93,9 @@ const SubmitProject = ({ user }: { user: any }) => {
           className="outline-none font-bold  h-[20vh] w-[40%] border-2 border-black rounded-lg pl-2"
         />
 
-        <Button type="submit">Submit</Button>
+        <Button type="submit" disabled={loading}>
+          {loading ? "Loading..." : "Submit"}
+        </Button>
       </form>
     </div>
   );
