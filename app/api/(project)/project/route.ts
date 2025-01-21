@@ -80,11 +80,16 @@ export const POST = async (request: Request) => {
       })
     );
   } catch (error: any) {
+    let errMsg = error instanceof Error ? error.message : 'Backend error'
+    errMsg = errMsg.replace("Project validation failed: ","")
     return new Response(
       JSON.stringify({
-        messahe: `Failed to create data`,
-        error: error.message,
-      })
+        error: `Failed to create data`,
+        message: errMsg,
+      }),
+      {
+        status: 400,
+      }
     );
   }
 };

@@ -27,12 +27,16 @@ const Header = async () => {
 
   return (
     <div className="w-full h-[10vh] flex items-center justify-between">
-      <Link href={"/"}><Image src={"/icon.svg"} alt="icon" width={200} height={200} /></Link>
+      <Link href={"/"}>
+        <Image src={"/icon.svg"} alt="icon" width={200} height={200} />
+      </Link>
 
       <div className="user-details py-5 h-full w-[70%] flex items-center justify-end gap-3 ">
         {session && session?.user ? (
           <>
-            <Link href={"/project/submit"}><Button>create</Button></Link>
+            <Link href={"/project/submit"}>
+              <Button>create</Button>
+            </Link>
 
             <form action={logoutHandler}>
               <Button>logout</Button>

@@ -30,7 +30,7 @@ const ProjectSchema = new mongoose.Schema({
   },
   description: {
     type: String,
-    maxlength: [20, "Use only 20 characters to write description"],
+    maxlength: [40, "Use only 40 characters to write description"],
     required: true,
   },
   details: {
