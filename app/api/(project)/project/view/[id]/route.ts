@@ -23,7 +23,7 @@ export const GET = async (
     }
 
     // Fetch projects for the user
-    const projects = await ProjectModel.updateOne(
+    await ProjectModel.updateOne(
       {
         _id: id,
       },
@@ -35,7 +35,7 @@ export const GET = async (
     return new Response(
       JSON.stringify({
         success: true,
-        message:"update successfully"
+        message: "update successfully",
       }),
       { status: 200 }
     );
@@ -45,6 +45,7 @@ export const GET = async (
       JSON.stringify({
         success: false,
         message: "Provide correct parameter",
+        error: error instanceof Error ? error.message : "Backend error",
       }),
       { status: 400 }
     );

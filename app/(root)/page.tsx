@@ -2,9 +2,6 @@ import { auth } from "@/auth";
 import Projects from "@/components/Projects";
 import Search from "@/components/Search";
 import Database from "@/lib/db";
-// import Form from "next/form";
-// import { RiSearchLine } from "react-icons/ri";
-// import { RxCross2 } from "react-icons/rx";
 Database();
 
 export default async function Home() {

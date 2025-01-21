@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import Database from "@/lib/db";
 import ProjectModel from "@/lib/modals/project.model";
 Database();

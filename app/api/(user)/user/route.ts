@@ -1,4 +1,4 @@
-import Database from "@/lib/db";
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import UserModel from "@/lib/modals/user.modal";
 
 // create user

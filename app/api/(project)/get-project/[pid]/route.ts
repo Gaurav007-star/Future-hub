@@ -52,6 +52,7 @@ export const GET = async (
       JSON.stringify({
         success: false,
         message: "Provide correct parameter",
+        error:error instanceof Error ? error.message : 'Backend error'
       }),
       { status: 400 }
     );
