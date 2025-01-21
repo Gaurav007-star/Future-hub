@@ -6,7 +6,8 @@ import React from "react";
 
 
 const page = async ({ params }: { params: { id: string } }) => {
-  const { id } = await params;
+  const param = await params
+  const { id } = param;
 
   let project = {};
   let user = {};
