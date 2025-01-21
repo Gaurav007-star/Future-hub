@@ -4,9 +4,13 @@ import View from "@/components/View";
 import Link from "next/link";
 import React from "react";
 
+interface PageProps {
+  params: {
+    id: string;
+  };
+}
 
-const page = async ({ params }: { params: { id: string } }) => {
-
+const page = async ({ params }: PageProps) => {
   const { id } = params;
 
   let project = {};
@@ -57,7 +61,7 @@ const page = async ({ params }: { params: { id: string } }) => {
           <h1 className="text-[5vh] text-green-500">
             {project?.projects?.title}
           </h1>
-          <View id={project?.projects._id} project={project}/>
+          <View id={project?.projects._id} project={project} />
           <h3 className="text-[2vh]">{project?.projects?.description}</h3>
         </div>
         <div className="right flex gap-3 items-center">
