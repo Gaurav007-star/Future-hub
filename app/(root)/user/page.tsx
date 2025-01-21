@@ -71,7 +71,7 @@ const page = async () => {
             project.map((project: any) => {
               return (
                 <div
-                  className="project-box w-auto h-auto rounded-lg p-5 cursor-pointer hover:transition-transform hover:scale-105 hover:shadow-3xl"
+                  className="project-box w-auto h-max rounded-lg p-5 cursor-pointer hover:transition-transform hover:scale-105 hover:shadow-3xl"
                   style={{ border: "4px solid black" }}
                   key={project?._id}
                 >

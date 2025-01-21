@@ -30,9 +30,9 @@ const SearchResult = ({
                         style={{ border: "4px solid black" }}
                         key={project?._id}
                       >
-                        <h2 className="text-[20px]">{project?.title}</h2>
-                        <p className="text-[14px]">{project?.description}</p>
-                        <img
+                        <h2 key={project?._id} className="text-[20px]">{project?.title}</h2>
+                        <p key={project?._id} className="text-[14px]">{project?.description}</p>
+                        <img key={project?._id}
                           src={project?.image || "https://placehold.co/600x400"}
                           alt="img"
                           style={{
@@ -47,14 +47,14 @@ const SearchResult = ({
                           className="user-details flex mt-5 h-[5vh] justify-between"
                           key={project?._id}
                         >
-                          <div className="left flex flex-col justify-center">
-                            <h3 className="text-[12px]">
+                          <div key={project?._id} className="left flex flex-col justify-center">
+                            <h3 key={project?._id} className="text-[12px]">
                               @{project?.author.name}
                             </h3>
                           </div>
                           <Link href={`/project/${project._id}`}>
                             {" "}
-                            <button className="text-[12px] text-center text-black bg-[#88ee02b1] rounded-[10px] px-[15px] shadow-button shadow-green-800 hover:scale-105 hover:transition-transform h-[4vh]">
+                            <button key={project?._id} className="text-[12px] text-center text-black bg-[#88ee02b1] rounded-[10px] px-[15px] shadow-button shadow-green-800 hover:scale-105 hover:transition-transform h-[4vh]">
                               Details
                             </button>
                           </Link>
